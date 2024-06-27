@@ -64,5 +64,13 @@ pipeline {
             }
         }
     }
+    stage ('Minikube Deploy') {
+          steps {
+            script {
+                sh "kubectl apply -f deployment.yml"
+                sh "kubectl apply -f service.yml"
+                }
+            }
+        }
   }
 }

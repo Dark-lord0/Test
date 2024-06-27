@@ -39,7 +39,7 @@ pipeline {
         script {
           sh 'docker build -t ${DOCKER_IMAGE} .'
           def dockerImage = docker.image("${DOCKER_IMAGE}")
-          docker.withRegistry('http://index.docker.io/v1/', "dockerhub") {
+          docker.withRegistry('https://index.docker.io/v1/', "dockerhub") {
             dockerImage.push()
           }
         }

@@ -1,8 +1,13 @@
-FROM python:3
-RUN pip install django==3.2
+# You can change this base image to anything else
+# But make sure to use the correct version of Java
+FROM adoptopenjdk/openjdk11:alpine-jre
 
-COPY . .
+# Simply the artifact path
+ARG artifact=target/spring-boot-web.jar
 
-RUN python manage.py migrate
-EXPOSE 8000
-CMD ["python","manage.py","runserver","0.0.0.0:8000"]
+WORKDIR /opt/app
+
+COPY ${artifact} app.jar
+
+# This should not be changed
+ENTRYPOINT ["java","-jar","app.jar"]
